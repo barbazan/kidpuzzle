@@ -8,10 +8,11 @@ import com.badlogic.gdx.input.GestureDetector;
 import ru.mgs.games.kidpuzzle.KidPuzzleGame;
 import ru.mgs.games.kidpuzzle.KidPuzzleUtil;
 
-import static ru.mgs.games.kidpuzzle.KidPuzzleGame.MENU_BG_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.MENU_BG_FILENAME;
 
 /**
- * Created by mit on 20.11.2017.
+ * Created by Дмитрий Малышев on 20.11.2017.
+ * Email: dmitry.malyshev@gmail.com
  */
 
 public class MenuScreen implements Screen {

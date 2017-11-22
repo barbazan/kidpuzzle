@@ -4,7 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector3;
 
 /**
- * Created by mit on 12.10.2017.
+ * Created by Дмитрий Малышев on 12.10.2017.
+ * Email: dmitry.malyshev@gmail.com
  */
 
 public enum PuzzleElementInfo {
@@ -18,8 +19,8 @@ public enum PuzzleElementInfo {
     PUZZLE_ELEMENT_7(),
     PUZZLE_ELEMENT_8();
 
-    static int sizeH = Gdx.graphics.getHeight() / 17;
-    static int sizeW = Gdx.graphics.getWidth() / 6;
+    public static final int sizeH = Gdx.graphics.getHeight() / 17;
+    public static final int sizeW = Gdx.graphics.getWidth() / 6;
 
     public String getFilename() {
         return "images/elem_" + (ordinal() + 1) + ".png";

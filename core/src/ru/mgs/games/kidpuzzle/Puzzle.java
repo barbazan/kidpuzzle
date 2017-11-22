@@ -16,7 +16,8 @@ import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_7;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_8;
 
 /**
- * Created by mit on 14.11.2017.
+ * Created by Дмитрий Малышев on 20.11.2017.
+ * Email: dmitry.malyshev@gmail.com
  */
 
 public enum Puzzle {

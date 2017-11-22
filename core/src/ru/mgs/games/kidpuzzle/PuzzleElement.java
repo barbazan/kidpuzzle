@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 
 /**
- * Created by mit on 01.11.2017.
+ * Created by Дмитрий Малышев on 01.11.2017.
+ * Email: dmitry.malyshev@gmail.com
  */
 
 public class PuzzleElement {
@@ -24,17 +25,11 @@ public class PuzzleElement {
     }
 
     public Sprite createPuzzleSprite(Vector3 unprojectPosition) {
-        Sprite sprite = KidPuzzleUtil.createSprite(info.getFilename());
-        sprite.setSize(info.getSize(), info.getSize());
-        sprite.setPosition(unprojectPosition.x, unprojectPosition.y);
-        return sprite;
+        return KidPuzzleUtil.createSprite(info.getFilename(), unprojectPosition, info.getSize());
     }
 
     public Sprite createPuzzleSpriteDisable(Vector3 unprojectPosition) {
-        Sprite sprite = KidPuzzleUtil.createSprite(info.getFilenameDisable());
-        sprite.setSize(info.getSize(), info.getSize());
-        sprite.setPosition(unprojectPosition.x, unprojectPosition.y);
-        return sprite;
+        return KidPuzzleUtil.createSprite(info.getFilenameDisable(), unprojectPosition, info.getSize());
     }
 
     public void resetPosition() {

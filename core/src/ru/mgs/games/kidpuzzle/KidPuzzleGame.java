@@ -10,12 +10,16 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import ru.mgs.games.kidpuzzle.screens.GameScreen;
 import ru.mgs.games.kidpuzzle.screens.MenuScreen;
 
+import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_CAMERA_ZOOM;
+
+/**
+ * Created by Дмитрий Малышев on 20.11.2017.
+ * Email: dmitry.malyshev@gmail.com
+ */
+
 public class KidPuzzleGame extends Game {
 
-	public static final String MENU_BG_FILENAME = "images/bg_menu.jpg";
-	public static final String GAME_BG_FILENAME = "images/bg_game.jpg";
-	public static final boolean SOUND_ON = false;
-	public static final float DEFAULT_CAMERA_ZOOM = 1f;
+	public static boolean SOUND_ON = false;
 
 	public MenuScreen menuScreen;
 	public GameScreen gameScreen;
