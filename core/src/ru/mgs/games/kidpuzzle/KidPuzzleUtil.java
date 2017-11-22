@@ -12,7 +12,6 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 public class KidPuzzleUtil {
 
     public static Sprite createSprite(String filename) {
-
         Texture texture = new Texture(Gdx.files.internal(filename));
         texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
         return new Sprite(texture);
