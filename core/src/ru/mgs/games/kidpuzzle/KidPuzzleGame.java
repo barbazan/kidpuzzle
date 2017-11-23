@@ -19,7 +19,8 @@ import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_CAMERA_ZOOM;
 
 public class KidPuzzleGame extends Game {
 
-	public static boolean SOUND_ON = false;
+	public static boolean MUSIC_ON = true;
+	public static boolean SOUND_ON = true;
 
 	public MenuScreen menuScreen;
 	public GameScreen gameScreen;
@@ -31,7 +32,6 @@ public class KidPuzzleGame extends Game {
 		initCam();
 		batch = new SpriteBatch();
 		menuScreen = new MenuScreen(this);
-		gameScreen = new GameScreen(this);
 		setScreen(menuScreen);
 		Gdx.input.setInputProcessor(menuScreen.getInputProcessor());
 	}

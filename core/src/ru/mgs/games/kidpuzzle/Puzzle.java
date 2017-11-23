@@ -26,13 +26,14 @@ public enum Puzzle {
     PUZZLE_2(Arrays.asList(PUZZLE_ELEMENT_5, PUZZLE_ELEMENT_6, PUZZLE_ELEMENT_7, PUZZLE_ELEMENT_8));
 
     private List<PuzzleElementInfo> puzzleElementInfos;
-    public List<PuzzleElement> puzzleElements = new ArrayList<PuzzleElement>();
+    public List<PuzzleElement> puzzleElements;
 
     Puzzle(List<PuzzleElementInfo> puzzleElementInfos) {
         this.puzzleElementInfos = puzzleElementInfos;
     }
 
     public void initPuzzle(OrthographicCamera cam) {
+        puzzleElements = new ArrayList<PuzzleElement>();
         for(PuzzleElementInfo info : puzzleElementInfos) {
             PuzzleElement puzzleElement = new PuzzleElement(info, cam);
             puzzleElements.add(puzzleElement);

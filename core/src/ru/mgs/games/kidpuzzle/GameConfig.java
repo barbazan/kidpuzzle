@@ -13,5 +13,6 @@ public class GameConfig {
     public static final String BTN_SOUND_FILENAME = "images/btn_sound.png";
     public static final String BTN_MUSIC_FILENAME = "images/btn_music.png";
     public static final float DEFAULT_CAMERA_ZOOM = 1f;
+    public static final float DEFAULT_SOUND_VOLUME = 0.3f;
 
 }
