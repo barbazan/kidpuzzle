@@ -20,6 +20,10 @@ import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_SOUND_VOLUME;
 import static ru.mgs.games.kidpuzzle.GameConfig.GAME_BG_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.PARTICLE_WIN_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_RIGHT_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_WIN_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_WRONG_FILENAME;
 import static ru.mgs.games.kidpuzzle.KidPuzzleGame.MUSIC_ON;
 import static ru.mgs.games.kidpuzzle.KidPuzzleGame.SOUND_ON;
 
@@ -31,7 +35,6 @@ import static ru.mgs.games.kidpuzzle.KidPuzzleGame.SOUND_ON;
 public class GameScreen implements Screen {
 
     private KidPuzzleGame game;
-    private Sound bgSound;
     private Sound rightSound;
     private Sound wrongSound;
     private Sound winSound;
@@ -58,14 +61,8 @@ public class GameScreen implements Screen {
 		puzzle.initPuzzle(game.cam);
     }
 
-    private boolean p = false;
-
     @Override
     public void render(float delta) {
-        if(!p && MUSIC_ON) {
-            bgSound.loop(DEFAULT_SOUND_VOLUME);
-            p = true;
-        }
 		game.clearScreen();
 		game.cam.update();
 
@@ -110,9 +107,9 @@ public class GameScreen implements Screen {
                 if(musicBtnSprite.getBoundingRectangle().contains(coords.x, coords.y)) {
                     MUSIC_ON = !MUSIC_ON;
                     if(MUSIC_ON) {
-                        bgSound.loop(DEFAULT_SOUND_VOLUME);
+                        game.bgSound.loop(DEFAULT_SOUND_VOLUME);
                     } else {
-                        bgSound.stop();
+                        game.bgSound.stop();
                     }
                     return true;
                 }
@@ -158,7 +155,6 @@ public class GameScreen implements Screen {
 				}
 				if(isWin && SOUND_ON && !winSoundPlay) {
                     winSoundPlay = true;
-                    bgSound.stop();
                     winSound.play(DEFAULT_SOUND_VOLUME);
                 }
 				return super.touchUp(x, y, pointer, button);
@@ -176,18 +172,12 @@ public class GameScreen implements Screen {
     }
 
     private void initSounds() {
-        bgSound = game.assetManager.get("sound/bg_sound.wav", Sound.class);
-        rightSound = game.assetManager.get("sound/right.mp3", Sound.class);
-        wrongSound = game.assetManager.get("sound/wrong.wav", Sound.class);
-        winSound = game.assetManager.get("sound/win.mp3", Sound.class);
-//        bgSound = Gdx.audio.newSound(Gdx.files.internal("sound/bg_sound.wav"));
-//        rightSound = Gdx.audio.newSound(Gdx.files.internal("sound/right.mp3"));
-//        wrongSound = Gdx.audio.newSound(Gdx.files.internal("sound/wrong.wav"));
-//        winSound = Gdx.audio.newSound(Gdx.files.internal("sound/win.mp3"));
+        rightSound = game.assetManager.get(SOUND_RIGHT_FILENAME, Sound.class);
+        wrongSound = game.assetManager.get(SOUND_WRONG_FILENAME, Sound.class);
+        winSound = game.assetManager.get(SOUND_WIN_FILENAME, Sound.class);
     }
 
     private void disposeSound() {
-        bgSound.dispose();
         rightSound.dispose();
         wrongSound.dispose();
         winSound.dispose();
@@ -211,13 +201,12 @@ public class GameScreen implements Screen {
     }
 
     private void initParticles() {
-        particleEffect = new ParticleEffect();
-        particleEffect.load(Gdx.files.internal("particles/particle_1.pe"), Gdx.files.internal(""));
+        particleEffect = game.assetManager.get(PARTICLE_WIN_FILENAME, ParticleEffect.class);
         particleEffect.getEmitters().first().setPosition(0, -Gdx.graphics.getHeight()/ 2);
-        particleEffect.start();
     }
 
     private void drawParticles() {
+        particleEffect.start();
         particleEffect.update(Gdx.graphics.getDeltaTime());
         particleEffect.draw(game.batch);
         if (particleEffect.isComplete()) {

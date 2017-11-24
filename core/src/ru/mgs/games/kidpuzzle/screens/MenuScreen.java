@@ -21,7 +21,6 @@ public class MenuScreen implements Screen {
     private Sprite bgSprite;
     private InputProcessor inputProcessor;
 
-    //в конструктор передаём ссылку на KidPuzzleGame
     public MenuScreen(KidPuzzleGame game){
         this.game = game;
         bgSprite = KidPuzzleUtil.initBg(game.cam, MENU_BG_FILENAME);
