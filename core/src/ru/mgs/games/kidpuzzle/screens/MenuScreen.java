@@ -47,10 +47,9 @@ public class MenuScreen implements Screen {
         inputProcessor = new GestureDetector(new GestureDetector.GestureAdapter() {
             @Override
             public boolean touchDown(float x, float y, int pointer, int button) {
-                if(game.gameScreen != null) {
-                    game.gameScreen.dispose();
+                if(game.gameScreen.isWin) {
+                    game.gameScreen = new GameScreen(game);
                 }
-                game.gameScreen = new GameScreen(game);
                 game.setScreen(game.gameScreen);
                 game.setInputProcessor(game.gameScreen.getInputProcessor());
                 return true;

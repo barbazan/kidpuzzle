@@ -44,7 +44,7 @@ public class GameScreen implements Screen {
 
     private Puzzle puzzle;
     private PuzzleElement selectedPuzzleElement;
-    private boolean isWin = false;
+    public boolean isWin = false;
     private boolean winSoundPlay = false;
 
     //в конструктор передаём ссылку на KidPuzzleGame
@@ -52,7 +52,7 @@ public class GameScreen implements Screen {
         this.game = game;
         bgSprite = KidPuzzleUtil.initBg(game.cam, GAME_BG_FILENAME);
         initButtons();
-        initSound();
+        initSounds();
         initParticles();
        	puzzle = Puzzle.PUZZLE_2; //todo
 		puzzle.initPuzzle(game.cam);
@@ -100,9 +100,7 @@ public class GameScreen implements Screen {
                 if(homeBtnSprite.getBoundingRectangle().contains(coords.x, coords.y)) {
                     game.setScreen(game.menuScreen);
                     game.setInputProcessor(game.menuScreen.getInputProcessor());
-                    bgSound.stop();
                     winSound.stop();
-                    dispose();
                     return true;
                 }
                 if(soundBtnSprite.getBoundingRectangle().contains(coords.x, coords.y)) {
@@ -177,11 +175,15 @@ public class GameScreen implements Screen {
         }
     }
 
-    private void initSound() {
-        bgSound = Gdx.audio.newSound(Gdx.files.internal("sound/bg_sound.wav"));
-        rightSound = Gdx.audio.newSound(Gdx.files.internal("sound/right.mp3"));
-        wrongSound = Gdx.audio.newSound(Gdx.files.internal("sound/wrong.wav"));
-        winSound = Gdx.audio.newSound(Gdx.files.internal("sound/win.mp3"));
+    private void initSounds() {
+        bgSound = game.assetManager.get("sound/bg_sound.wav", Sound.class);
+        rightSound = game.assetManager.get("sound/right.mp3", Sound.class);
+        wrongSound = game.assetManager.get("sound/wrong.wav", Sound.class);
+        winSound = game.assetManager.get("sound/win.mp3", Sound.class);
+//        bgSound = Gdx.audio.newSound(Gdx.files.internal("sound/bg_sound.wav"));
+//        rightSound = Gdx.audio.newSound(Gdx.files.internal("sound/right.mp3"));
+//        wrongSound = Gdx.audio.newSound(Gdx.files.internal("sound/wrong.wav"));
+//        winSound = Gdx.audio.newSound(Gdx.files.internal("sound/win.mp3"));
     }
 
     private void disposeSound() {
