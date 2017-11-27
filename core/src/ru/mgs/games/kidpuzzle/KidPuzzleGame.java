@@ -7,6 +7,7 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
@@ -14,8 +15,13 @@ import ru.mgs.games.kidpuzzle.screens.GameScreen;
 import ru.mgs.games.kidpuzzle.screens.LoadingScreen;
 import ru.mgs.games.kidpuzzle.screens.MenuScreen;
 
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_HOME_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_CAMERA_ZOOM;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_SOUND_VOLUME;
+import static ru.mgs.games.kidpuzzle.GameConfig.GAME_BG_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.MENU_BG_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.PARTICLE_WIN_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_BG_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_RIGHT_FILENAME;
@@ -29,36 +35,46 @@ import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_WRONG_FILENAME;
 
 public class KidPuzzleGame extends Game {
 
-	public static boolean MUSIC_ON = true;
+	public static boolean MUSIC_ON = false;
 	public static boolean SOUND_ON = true;
 
+	public static AssetManager assetManager = new AssetManager();
 	public LoadingScreen loadingScreen;
 	public MenuScreen menuScreen;
 	public GameScreen gameScreen;
 	public OrthographicCamera cam;
 	public SpriteBatch batch;
-	public AssetManager assetManager;
 	public Sound bgSound;
 
 	@Override
 	public void create () {
 		initCam();
 		batch = new SpriteBatch();
-		assetManager = new AssetManager();
+		loadResources();
+		loadingScreen = new LoadingScreen(this);
+		setScreen(loadingScreen);
+	}
+
+	private void loadResources() {
 		assetManager.load(SOUND_BG_FILENAME, Sound.class);
 		assetManager.load(SOUND_RIGHT_FILENAME, Sound.class);
 		assetManager.load(SOUND_WRONG_FILENAME, Sound.class);
 		assetManager.load(SOUND_WIN_FILENAME, Sound.class);
 		assetManager.load(PARTICLE_WIN_FILENAME, ParticleEffect.class);
-		loadingScreen = new LoadingScreen(this);
-		setScreen(loadingScreen);
+		assetManager.load(MENU_BG_FILENAME, Texture.class);
+		assetManager.load(GAME_BG_FILENAME, Texture.class);
+		assetManager.load(BTN_HOME_FILENAME, Texture.class);
+		assetManager.load(BTN_SOUND_FILENAME, Texture.class);
+		assetManager.load(BTN_MUSIC_FILENAME, Texture.class);
 	}
 
 	public void finishLoading() {
 		menuScreen = new MenuScreen(this);
 		gameScreen = new GameScreen(this);
 		bgSound = assetManager.get(SOUND_BG_FILENAME, Sound.class);
-		bgSound.loop(DEFAULT_SOUND_VOLUME);
+		if(MUSIC_ON) {
+			bgSound.loop(DEFAULT_SOUND_VOLUME);
+		}
 		Gdx.input.setInputProcessor(menuScreen.getInputProcessor());
 		setScreen(menuScreen);
 	}
@@ -90,8 +106,11 @@ public class KidPuzzleGame extends Game {
 
 	@Override
 	public void dispose() {
-		super.dispose();
 		bgSound.dispose();
 		assetManager.dispose();
+		loadingScreen.dispose();
+		menuScreen.dispose();
+		gameScreen.dispose();
+		super.dispose();
 	}
 }

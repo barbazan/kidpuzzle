@@ -2,7 +2,6 @@ package ru.mgs.games.kidpuzzle.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.ParticleEffect;
 import com.badlogic.gdx.graphics.g2d.Sprite;
@@ -32,28 +31,24 @@ import static ru.mgs.games.kidpuzzle.KidPuzzleGame.SOUND_ON;
  * Email: dmitry.malyshev@gmail.com
  */
 
-public class GameScreen implements Screen {
+public class GameScreen extends BaseScreen {
 
-    private KidPuzzleGame game;
     private Sound rightSound;
     private Sound wrongSound;
     private Sound winSound;
-    private Sprite bgSprite;
     private Sprite homeBtnSprite;
     private Sprite soundBtnSprite;
     private Sprite musicBtnSprite;
     private ParticleEffect particleEffect;
-    private InputProcessor inputProcessor;
 
     private Puzzle puzzle;
     private PuzzleElement selectedPuzzleElement;
     public boolean isWin = false;
     private boolean winSoundPlay = false;
 
-    //в конструктор передаём ссылку на KidPuzzleGame
-    public GameScreen(KidPuzzleGame game){
+    public GameScreen(KidPuzzleGame game) {
+        super(game);
         this.game = game;
-        bgSprite = KidPuzzleUtil.initBg(game.cam, GAME_BG_FILENAME);
         initButtons();
         initSounds();
         initParticles();
@@ -67,7 +62,7 @@ public class GameScreen implements Screen {
 		game.cam.update();
 
 		game.batchBegin();
-		bgSprite.draw(game.batch);
+		getBgSprite().draw(game.batch);
         drawPuzzle();
 		drawButtons();
 		if(isWin) {
@@ -80,17 +75,11 @@ public class GameScreen implements Screen {
     public void dispose () {
         disposeSound();
         disposeParticles();
+        super.dispose();
     }
 
-    public InputProcessor getInputProcessor() {
-        if(inputProcessor == null) {
-            initInputProcessor();
-        }
-        return inputProcessor;
-    }
-
-    private void initInputProcessor() {
-		inputProcessor = new GestureDetector(new GestureDetector.GestureAdapter() {
+    protected InputProcessor initInputProcessor() {
+		return new GestureDetector(new GestureDetector.GestureAdapter() {
 			@Override
 			public boolean touchDown(float x, float y, int pointer, int button) {
 				Vector3 coords = game.cam.unproject(new Vector3(x, y , 0));
@@ -162,6 +151,11 @@ public class GameScreen implements Screen {
 		};
 	}
 
+    @Override
+    protected Sprite initBgSprite() {
+        return KidPuzzleUtil.createBgSprite(game.cam, GAME_BG_FILENAME);
+    }
+
     private void drawPuzzle() {
         for(PuzzleElement puzzleElement : puzzle.puzzleElements) {
             puzzleElement.spriteDisable.draw(game.batch);
@@ -203,6 +197,7 @@ public class GameScreen implements Screen {
     private void initParticles() {
         particleEffect = game.assetManager.get(PARTICLE_WIN_FILENAME, ParticleEffect.class);
         particleEffect.getEmitters().first().setPosition(0, -Gdx.graphics.getHeight()/ 2);
+        particleEffect.reset();
     }
 
     private void drawParticles() {
@@ -216,30 +211,5 @@ public class GameScreen implements Screen {
 
     private void disposeParticles() {
         particleEffect.dispose();
-    }
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
     }
 }

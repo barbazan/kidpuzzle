@@ -1,7 +1,6 @@
 package ru.mgs.games.kidpuzzle.screens;
 
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.input.GestureDetector;
 
@@ -15,15 +14,10 @@ import static ru.mgs.games.kidpuzzle.GameConfig.MENU_BG_FILENAME;
  * Email: dmitry.malyshev@gmail.com
  */
 
-public class MenuScreen implements Screen {
-
-    private KidPuzzleGame game;
-    private Sprite bgSprite;
-    private InputProcessor inputProcessor;
+public class MenuScreen extends BaseScreen {
 
     public MenuScreen(KidPuzzleGame game){
-        this.game = game;
-        bgSprite = KidPuzzleUtil.initBg(game.cam, MENU_BG_FILENAME);
+        super(game);
     }
 
     @Override
@@ -31,24 +25,15 @@ public class MenuScreen implements Screen {
         game.clearScreen();
         game.cam.update();
         game.batchBegin();
-        bgSprite.draw(game.batch);
+        getBgSprite().draw(game.batch);
         game.batchEnd();
     }
 
-    public InputProcessor getInputProcessor() {
-        if(inputProcessor == null) {
-            initInputProcessor();
-        }
-        return inputProcessor;
-    }
-
-    private void initInputProcessor() {
-        inputProcessor = new GestureDetector(new GestureDetector.GestureAdapter() {
+    protected InputProcessor initInputProcessor() {
+        return new GestureDetector(new GestureDetector.GestureAdapter() {
             @Override
             public boolean touchDown(float x, float y, int pointer, int button) {
-                if(game.gameScreen.isWin) {
-                    game.gameScreen = new GameScreen(game);
-                }
+                game.gameScreen = new GameScreen(game);
                 game.setScreen(game.gameScreen);
                 game.setInputProcessor(game.gameScreen.getInputProcessor());
                 return true;
@@ -57,32 +42,7 @@ public class MenuScreen implements Screen {
     }
 
     @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
-    }
-
-    @Override
-    public void dispose() {
-
+    protected Sprite initBgSprite() {
+        return KidPuzzleUtil.createBgSprite(game.cam, MENU_BG_FILENAME);
     }
 }

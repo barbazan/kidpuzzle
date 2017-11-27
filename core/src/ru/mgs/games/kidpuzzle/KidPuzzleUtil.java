@@ -30,13 +30,13 @@ public class KidPuzzleUtil {
         return sprite;
     }
 
-    public static Sprite initBg(OrthographicCamera cam, String bgFileName) {
+    public static Sprite createBgSprite(OrthographicCamera cam, String bgFileName) {
         Sprite bgSprite = createSprite(bgFileName);
         float xScale = cam.viewportWidth / bgSprite.getWidth();
         float yScale = cam.viewportHeight / bgSprite.getHeight();
         float scale = Math.max(xScale, yScale);
         bgSprite.setScale(scale);
-        bgSprite.setPosition(-bgSprite.getWidth()/2, -bgSprite.getHeight()/2);
+        bgSprite.setPosition(-bgSprite.getWidth() / 2, -bgSprite.getHeight() / 2);
         return bgSprite;
     }
 

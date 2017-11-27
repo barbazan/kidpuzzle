@@ -1,7 +1,8 @@
 package ru.mgs.games.kidpuzzle.screens;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
@@ -13,15 +14,14 @@ import ru.mgs.games.kidpuzzle.KidPuzzleGame;
  * Created by Дмитрий Малышев on 23.11.2017.
  * Email: dmitry.malyshev@gmail.com
  */
-public class LoadingScreen  implements Screen {
+public class LoadingScreen extends BaseScreen {
 
-    private KidPuzzleGame game;
     private Stage stage;
     private Skin skin;
     private Label loading;
 
     public LoadingScreen(KidPuzzleGame game) {
-        this.game = game;
+        super(game);
         stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
         skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
         loading = new Label("Загрузка...", skin);
@@ -43,32 +43,18 @@ public class LoadingScreen  implements Screen {
     }
 
     @Override
+    protected InputProcessor initInputProcessor() {
+        return null;
+    }
+
+    @Override
+    protected Sprite initBgSprite() {
+        return null;
+    }
+
+    @Override
     public void dispose() {
         stage.dispose();
-    }
-
-    @Override
-    public void show() {
-
-    }
-
-    @Override
-    public void resize(int width, int height) {
-
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
-    public void hide() {
-
+        skin.dispose();
     }
 }

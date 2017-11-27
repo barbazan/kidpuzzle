@@ -18,7 +18,7 @@ public class GameConfig {
 
     public static final String SOUND_BG_FILENAME = "sound/bg_sound.wav";
     public static final String SOUND_RIGHT_FILENAME = "sound/right.mp3";
-    public static final String SOUND_WRONG_FILENAME = "sound/wrong.wav";
+    public static final String SOUND_WRONG_FILENAME = "sound/wrong.mp3";
     public static final String SOUND_WIN_FILENAME = "sound/win.mp3";
 
     public static final String PARTICLE_WIN_FILENAME = "particles/particle_1.pe";
