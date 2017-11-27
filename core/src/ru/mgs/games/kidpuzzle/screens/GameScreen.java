@@ -196,7 +196,7 @@ public class GameScreen extends BaseScreen {
 
     private void initParticles() {
         particleEffect = game.assetManager.get(PARTICLE_WIN_FILENAME, ParticleEffect.class);
-        particleEffect.getEmitters().first().setPosition(0, -Gdx.graphics.getHeight()/ 2);
+        particleEffect.getEmitters().first().setPosition(0, -Gdx.graphics.getHeight() / 2);
         particleEffect.reset();
     }
 
@@ -204,9 +204,9 @@ public class GameScreen extends BaseScreen {
         particleEffect.start();
         particleEffect.update(Gdx.graphics.getDeltaTime());
         particleEffect.draw(game.batch);
-        if (particleEffect.isComplete()) {
-            particleEffect.reset();
-        }
+//        if (particleEffect.isComplete()) {
+//            particleEffect.reset();
+//        }
     }
 
     private void disposeParticles() {
