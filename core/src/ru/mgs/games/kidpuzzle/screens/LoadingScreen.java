@@ -33,6 +33,7 @@ public class LoadingScreen extends BaseScreen {
     public void render(float delta) {
         game.clearScreen();
         if(game.assetManager.update()) {
+            loading.setText("Загрузка... 100%");
             game.finishLoading();
         } else {
             int progress = (int)(game.assetManager.getProgress() * 100);
