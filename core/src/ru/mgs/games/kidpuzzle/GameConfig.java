@@ -7,10 +7,13 @@ package ru.mgs.games.kidpuzzle;
 
 public class GameConfig {
 
+    public static final String ADMOB_APP_ID = "ca-app-pub-3343705216065863~3733892424";
+    public static final String ADMOB_BUNNER_ID = "ca-app-pub-3343705216065863/8037891528";
+
     public static final float DEFAULT_CAMERA_ZOOM = 1f;
     public static final float DEFAULT_SOUND_VOLUME = 0.3f;
 
-    public static final String MENU_BG_FILENAME = "images/bg_menu.jpg";
+    public static final String MENU_BG_FILENAME = "images/bg_game.jpg";
     public static final String GAME_BG_FILENAME = "images/bg_game.jpg";
     public static final String BTN_HOME_FILENAME = "images/btn_home.png";
     public static final String BTN_SOUND_FILENAME = "images/btn_sound.png";

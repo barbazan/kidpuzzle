@@ -45,6 +45,12 @@ public class KidPuzzleGame extends Game {
 	public OrthographicCamera cam;
 	public SpriteBatch batch;
 	public Sound bgSound;
+	public AdHandler adHandler;
+	public boolean adToggle;
+
+	public KidPuzzleGame(AdHandler adHandler) {
+		this.adHandler = adHandler;
+	}
 
 	@Override
 	public void create () {
@@ -53,6 +59,15 @@ public class KidPuzzleGame extends Game {
 		loadResources();
 		loadingScreen = new LoadingScreen(this);
 		setScreen(loadingScreen);
+	}
+
+	@Override
+	public void render() {
+//		if(Gdx.input.justTouched()) {
+//			adHandler.showAds(adToggle);  // так будем отключать рекламу после оплаты
+//			adToggle = !adToggle;
+//		}
+		getScreen().render(Gdx.graphics.getDeltaTime());
 	}
 
 	private void loadResources() {

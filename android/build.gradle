@@ -19,8 +19,8 @@ android {
     }
     defaultConfig {
         applicationId "ru.mgs.games.kidpuzzle"
-        minSdkVersion 9
-        targetSdkVersion 26
+//        minSdkVersion 14 // иначе перетирает значения в манифесте
+//        targetSdkVersion 26
     }
 }
 
