@@ -1,17 +1,21 @@
 package ru.mgs.games.kidpuzzle;
 
-import org.robovm.apple.foundation.NSAutoreleasePool;
-import org.robovm.apple.uikit.UIApplication;
-
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
-import ru.mgs.games.kidpuzzle.KidPuzzleGame;
+
+import org.robovm.apple.foundation.NSAutoreleasePool;
+import org.robovm.apple.uikit.UIApplication;
 
 public class IOSLauncher extends IOSApplication.Delegate {
     @Override
     protected IOSApplication createApplication() {
         IOSApplicationConfiguration config = new IOSApplicationConfiguration();
-        return new IOSApplication(new KidPuzzleGame(), config);
+        return new IOSApplication(new KidPuzzleGame(new AdHandler() {
+            @Override
+            public void showAds(boolean show) {
+
+            }
+        }), config);
     }
 
     public static void main(String[] argv) {

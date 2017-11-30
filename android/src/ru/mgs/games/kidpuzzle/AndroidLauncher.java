@@ -50,7 +50,24 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler {
 				int visibility = adView.getVisibility();
 				adView.setVisibility(AdView.GONE);
 				adView.setVisibility(visibility);
-				Log.i(TAG, "Ad loaded ...");
+				Log.i(TAG, "Ad loaded ...........................................");
+			}
+
+			@Override
+			public void onAdFailedToLoad(int i) {
+				String error = "";
+				switch (i) {
+					case AdRequest.ERROR_CODE_INTERNAL_ERROR:
+						error = "ERROR_CODE_INTERNAL_ERROR"; break;
+					case AdRequest.ERROR_CODE_INVALID_REQUEST:
+						error = "ERROR_CODE_INVALID_REQUEST"; break;
+					case AdRequest.ERROR_CODE_NETWORK_ERROR:
+						error = "ERROR_CODE_NETWORK_ERROR"; break;
+					case AdRequest.ERROR_CODE_NO_FILL:
+						error = "ERROR_CODE_NO_FILL"; break;
+					default: error = String.valueOf(i);
+				}
+				Log.e(TAG, "Ad failed to load ........................................... " + error);
 			}
 		});
 		adView.setAdSize(AdSize.SMART_BANNER);
