@@ -17,6 +17,7 @@ import ru.mgs.games.kidpuzzle.screens.MenuScreen;
 
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_HOME_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_PAY_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_CAMERA_ZOOM;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_SOUND_VOLUME;
@@ -46,7 +47,6 @@ public class KidPuzzleGame extends Game {
 	public SpriteBatch batch;
 	public Sound bgSound;
 	public AdHandler adHandler;
-	public boolean adToggle;
 
 	public KidPuzzleGame(AdHandler adHandler) {
 		this.adHandler = adHandler;
@@ -61,15 +61,6 @@ public class KidPuzzleGame extends Game {
 		setScreen(loadingScreen);
 	}
 
-	@Override
-	public void render() {
-//		if(Gdx.input.justTouched()) {
-//			adHandler.showAds(adToggle);  // так будем отключать рекламу после оплаты
-//			adToggle = !adToggle;
-//		}
-		getScreen().render(Gdx.graphics.getDeltaTime());
-	}
-
 	private void loadResources() {
 		assetManager.load(SOUND_BG_FILENAME, Sound.class);
 		assetManager.load(SOUND_RIGHT_FILENAME, Sound.class);
@@ -81,6 +72,7 @@ public class KidPuzzleGame extends Game {
 		assetManager.load(BTN_HOME_FILENAME, Texture.class);
 		assetManager.load(BTN_SOUND_FILENAME, Texture.class);
 		assetManager.load(BTN_MUSIC_FILENAME, Texture.class);
+		assetManager.load(BTN_PAY_FILENAME, Texture.class);
 	}
 
 	public void finishLoading() {

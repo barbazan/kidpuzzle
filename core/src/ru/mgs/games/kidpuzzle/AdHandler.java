@@ -5,5 +5,7 @@ package ru.mgs.games.kidpuzzle;
  * Email: dmitry.malyshev@gmail.com
  */
 public interface AdHandler {
-    public void showAds(boolean show);
+    void showAds(boolean show);
+    void removeAds();
+    void processPurchases();
 }

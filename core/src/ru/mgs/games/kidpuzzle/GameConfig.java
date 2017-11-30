@@ -18,6 +18,7 @@ public class GameConfig {
     public static final String BTN_HOME_FILENAME = "images/btn_home.png";
     public static final String BTN_SOUND_FILENAME = "images/btn_sound.png";
     public static final String BTN_MUSIC_FILENAME = "images/btn_music.png";
+    public static final String BTN_PAY_FILENAME = "images/btn_pay.png";
 
     public static final String SOUND_BG_FILENAME = "sound/bg_sound.wav";
     public static final String SOUND_RIGHT_FILENAME = "sound/right.mp3";
