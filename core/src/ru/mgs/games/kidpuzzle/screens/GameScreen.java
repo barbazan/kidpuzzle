@@ -186,7 +186,7 @@ public class GameScreen extends BaseScreen {
     }
 
     private void initButtons() {
-        int size = PuzzleElementInfo.PUZZLE_ELEMENT_1.getSize() / 2;
+        float size = PuzzleElementInfo.PUZZLE_ELEMENT_1.getSize() / 1.5f;
         float x = Gdx.graphics.getWidth() - size * 1.5f;
         float y = size * 1.5f;
         homeBtnSprite = KidPuzzleUtil.createSprite(BTN_HOME_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
