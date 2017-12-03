@@ -15,6 +15,16 @@ public class IOSLauncher extends IOSApplication.Delegate {
             public void showAds(boolean show) {
 
             }
+
+            @Override
+            public void removeAds() {
+
+            }
+
+            @Override
+            public void processPurchases() {
+
+            }
         }), config);
     }
 
