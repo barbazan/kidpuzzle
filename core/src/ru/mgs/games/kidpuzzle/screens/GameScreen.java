@@ -54,7 +54,7 @@ public class GameScreen extends BaseScreen {
         initButtons();
         initSounds();
         initParticles();
-       	puzzle = Puzzle.PUZZLE_2; //todo
+       	puzzle = Puzzle.PUZZLE_9; //todo
 		puzzle.initPuzzle(game.cam);
     }
 

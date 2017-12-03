@@ -142,9 +142,10 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler {
 			public void onIabSetupFinished(IabResult result) {
 				if (!result.isSuccess()) {
 					Log.e("IAB", "--------------------------Problem setting up In-app Billing: " + result);
+				} else {
+					Log.i("IAB", "--------------------------Billing Success: " + result);
+					processPurchases();
 				}
-				Log.i("IAB", "--------------------------Billing Success: " + result);
-				processPurchases();
 			}
 		});
 	}
