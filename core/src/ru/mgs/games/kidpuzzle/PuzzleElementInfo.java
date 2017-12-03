@@ -55,8 +55,20 @@ public enum PuzzleElementInfo {
         return "images/elem_" + (ordinal() + 1) + "_dis.png";
     }
 
+    public int getSizeH() {
+        return Gdx.graphics.getHeight() / 17;
+    }
+
+    public int getSizeW() {
+        return Gdx.graphics.getWidth() / 6;
+    }
+
     public int getSize() {
-        return Math.min(getSizeH(), getSizeW()) * 3;
+        return getSizeH() * 3;
+    }
+
+    public int getSizeDisabled() {
+        return getSizeH() * 6;
     }
 
     public Vector3 getStartPosition() {
@@ -71,9 +83,9 @@ public enum PuzzleElementInfo {
         int num = 1 + ordinal() % 4;
         switch (num) {
             case 1:
-            case 3: return 2;
+            case 3: return 1.5f;
             case 2:
-            case 4: return 4;
+            case 4: return 3.5f;
         }
         return 0;
     }
@@ -84,16 +96,8 @@ public enum PuzzleElementInfo {
             case 1:
             case 2: return 8;
             case 3:
-            case 4: return 12;
+            case 4: return 16;
         }
         return 0;
-    }
-
-    public int getSizeH() {
-        return Gdx.graphics.getHeight() / 17;
-    }
-
-    public int getSizeW() {
-        return Gdx.graphics.getWidth() / 6;
     }
 }

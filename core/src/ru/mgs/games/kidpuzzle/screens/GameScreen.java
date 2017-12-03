@@ -120,7 +120,8 @@ public class GameScreen extends BaseScreen {
 			public boolean pan(float x, float y, float deltaX, float deltaY) {
 				Vector3 coords = game.cam.unproject(new Vector3(x, y , 0));
 				if(selectedPuzzleElement != null) {
-					selectedPuzzleElement.sprite.setPosition(coords.x - selectedPuzzleElement.sprite.getWidth() / 2, coords.y - selectedPuzzleElement.sprite.getHeight() / 2);
+				    selectedPuzzleElement.setSize(selectedPuzzleElement.info.getSizeDisabled());
+					selectedPuzzleElement.setPosition(coords.x - selectedPuzzleElement.sprite.getWidth() / 2, coords.y - selectedPuzzleElement.sprite.getHeight() / 2);
 				}
 				return super.pan(x, y, deltaX, deltaY);
 			}
@@ -134,6 +135,7 @@ public class GameScreen extends BaseScreen {
                             rightSound.play(DEFAULT_SOUND_VOLUME);
                         }
 					} else {
+                        selectedPuzzleElement.setSize(selectedPuzzleElement.info.getSize());
 						selectedPuzzleElement.resetPosition();
                         if(SOUND_ON) {
                             wrongSound.play(DEFAULT_SOUND_VOLUME);

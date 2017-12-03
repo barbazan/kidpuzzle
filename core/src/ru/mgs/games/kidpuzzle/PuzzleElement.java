@@ -29,11 +29,19 @@ public class PuzzleElement {
     }
 
     public Sprite createPuzzleSpriteDisable(Vector3 unprojectPosition) {
-        return KidPuzzleUtil.createSprite(info.getFilenameDisable(), unprojectPosition, info.getSize());
+        return KidPuzzleUtil.createSprite(info.getFilenameDisable(), unprojectPosition, info.getSizeDisabled());
     }
 
     public void resetPosition() {
         sprite.setPosition(cam.unproject(info.getStartPosition()).x, cam.unproject(info.getStartPosition()).y);
+    }
+
+    public void setSize(float size) {
+        sprite.setSize(size, size);
+    }
+
+    public void setPosition(float x, float y) {
+        sprite.setPosition(x, y);
     }
 
     public boolean isInPlace() {
