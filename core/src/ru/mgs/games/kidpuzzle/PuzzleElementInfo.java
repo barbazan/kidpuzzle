@@ -79,6 +79,14 @@ public enum PuzzleElementInfo {
         return new Vector3(getSizeW() * getMultX(), getSizeH() * getMultY(), 0);
     }
 
+    public Vector3 getPositionForMenu() {
+        int col = 1 + ordinal() / 4;
+        int row = 1 + ordinal() / 20;
+        float deltaX = Gdx.graphics.getWidth() / 20;
+        float deltaY = Gdx.graphics.getHeight() / 3;
+        return new Vector3(deltaX * col, deltaY * row, 0);
+    }
+
     private float getMultX() {
         int num = 1 + ordinal() % 4;
         switch (num) {
@@ -97,6 +105,24 @@ public enum PuzzleElementInfo {
             case 2: return 8;
             case 3:
             case 4: return 16;
+        }
+        return 0;
+    }
+
+    private float getMenuMultX() {
+        int num = 1 + ordinal() % 5;
+        switch (num) {
+            case 1:
+            case 2: return 1.5f;
+        }
+        return 0;
+    }
+
+    private float getMenuMultY() {
+        int num = 1 + ordinal() % 2;
+        switch (num) {
+            case 1: return 4;
+            case 2: return 8;
         }
         return 0;
     }

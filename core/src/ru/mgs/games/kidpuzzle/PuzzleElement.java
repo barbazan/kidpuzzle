@@ -1,6 +1,5 @@
 package ru.mgs.games.kidpuzzle;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector3;
 
@@ -14,26 +13,32 @@ public class PuzzleElement {
     public PuzzleElementInfo info;
     public Sprite sprite;
     public Sprite spriteDisable;
+    public Sprite spriteMenu;
     public boolean fixed;
-    private OrthographicCamera cam;
+    private KidPuzzleGame game;
 
-    public PuzzleElement(PuzzleElementInfo info, OrthographicCamera cam) {
+    public PuzzleElement(PuzzleElementInfo info, KidPuzzleGame game) {
         this.info = info;
-        this.cam = cam;
-        sprite = createPuzzleSprite(cam.unproject(info.getStartPosition()));
-        spriteDisable = createPuzzleSpriteDisable(cam.unproject(info.getPositionDisabled()));
+        this.game = game;
+        sprite = createPuzzleSprite(game.cam.unproject(info.getStartPosition()));
+        spriteDisable = createPuzzleSpriteDisable(game.cam.unproject(info.getPositionDisabled()));
+        spriteMenu = createPuzzleSpriteMenu(game.cam.unproject(info.getPositionForMenu()));
     }
 
     public Sprite createPuzzleSprite(Vector3 unprojectPosition) {
-        return KidPuzzleUtil.createSprite(info.getFilename(), unprojectPosition, info.getSize());
+        return KidPuzzleGame.createSprite(info.getFilename(), unprojectPosition, info.getSize());
     }
 
     public Sprite createPuzzleSpriteDisable(Vector3 unprojectPosition) {
-        return KidPuzzleUtil.createSprite(info.getFilenameDisable(), unprojectPosition, info.getSizeDisabled());
+        return KidPuzzleGame.createSprite(info.getFilenameDisable(), unprojectPosition, info.getSizeDisabled());
+    }
+
+    public Sprite createPuzzleSpriteMenu(Vector3 unprojectPosition) {
+        return KidPuzzleGame.createSprite(info.getFilename(), unprojectPosition, info.getSize());
     }
 
     public void resetPosition() {
-        sprite.setPosition(cam.unproject(info.getStartPosition()).x, cam.unproject(info.getStartPosition()).y);
+        sprite.setPosition(game.cam.unproject(info.getStartPosition()).x, game.cam.unproject(info.getStartPosition()).y);
     }
 
     public void setSize(float size) {

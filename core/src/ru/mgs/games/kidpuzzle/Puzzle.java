@@ -1,20 +1,39 @@
 package ru.mgs.games.kidpuzzle;
 
-import com.badlogic.gdx.graphics.OrthographicCamera;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.*;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_1;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_10;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_11;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_12;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_13;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_14;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_15;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_16;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_17;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_18;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_19;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_2;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_20;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_21;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_22;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_23;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_24;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_25;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_26;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_27;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_28;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_29;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_3;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_30;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_31;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_32;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_33;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_34;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_35;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_36;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_4;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_5;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_6;
@@ -39,17 +58,17 @@ public enum Puzzle {
     PUZZLE_8(Arrays.asList(PUZZLE_ELEMENT_29, PUZZLE_ELEMENT_30, PUZZLE_ELEMENT_31, PUZZLE_ELEMENT_32)),
     PUZZLE_9(Arrays.asList(PUZZLE_ELEMENT_33, PUZZLE_ELEMENT_34, PUZZLE_ELEMENT_35, PUZZLE_ELEMENT_36));
 
-    private List<PuzzleElementInfo> puzzleElementInfos;
+    public List<PuzzleElementInfo> puzzleElementInfos;
     public List<PuzzleElement> puzzleElements;
 
     Puzzle(List<PuzzleElementInfo> puzzleElementInfos) {
         this.puzzleElementInfos = puzzleElementInfos;
     }
 
-    public void initPuzzle(OrthographicCamera cam) {
+    public void initPuzzle(KidPuzzleGame game) {
         puzzleElements = new ArrayList<PuzzleElement>();
         for(PuzzleElementInfo info : puzzleElementInfos) {
-            PuzzleElement puzzleElement = new PuzzleElement(info, cam);
+            PuzzleElement puzzleElement = new PuzzleElement(info, game);
             puzzleElements.add(puzzleElement);
         }
     }

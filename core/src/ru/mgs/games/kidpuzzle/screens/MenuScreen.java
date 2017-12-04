@@ -5,7 +5,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.input.GestureDetector;
 
 import ru.mgs.games.kidpuzzle.KidPuzzleGame;
-import ru.mgs.games.kidpuzzle.KidPuzzleUtil;
+import ru.mgs.games.kidpuzzle.Puzzle;
 
 import static ru.mgs.games.kidpuzzle.GameConfig.MENU_BG_FILENAME;
 
@@ -26,6 +26,10 @@ public class MenuScreen extends BaseScreen {
         game.cam.update();
         game.batchBegin();
         getBgSprite().draw(game.batch);
+        for(Puzzle puzzle : game.puzzles) {
+            Sprite spriteMenu = puzzle.puzzleElements.get(0).spriteMenu;
+            spriteMenu.draw(game.batch);
+        }
         game.batchEnd();
     }
 
@@ -43,6 +47,6 @@ public class MenuScreen extends BaseScreen {
 
     @Override
     protected Sprite initBgSprite() {
-        return KidPuzzleUtil.createBgSprite(game.cam, MENU_BG_FILENAME);
+        return KidPuzzleGame.createBgSprite(game.cam, MENU_BG_FILENAME);
     }
 }

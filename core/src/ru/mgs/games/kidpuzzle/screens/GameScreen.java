@@ -9,7 +9,6 @@ import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector3;
 
 import ru.mgs.games.kidpuzzle.KidPuzzleGame;
-import ru.mgs.games.kidpuzzle.KidPuzzleUtil;
 import ru.mgs.games.kidpuzzle.Puzzle;
 import ru.mgs.games.kidpuzzle.PuzzleElement;
 import ru.mgs.games.kidpuzzle.PuzzleElementInfo;
@@ -54,8 +53,8 @@ public class GameScreen extends BaseScreen {
         initButtons();
         initSounds();
         initParticles();
-       	puzzle = Puzzle.PUZZLE_9; //todo
-		puzzle.initPuzzle(game.cam);
+       	puzzle = Puzzle.PUZZLE_1; //todo
+		puzzle.initPuzzle(game);
     }
 
     @Override
@@ -161,7 +160,7 @@ public class GameScreen extends BaseScreen {
 
     @Override
     protected Sprite initBgSprite() {
-        return KidPuzzleUtil.createBgSprite(game.cam, GAME_BG_FILENAME);
+        return KidPuzzleGame.createBgSprite(game.cam, GAME_BG_FILENAME);
     }
 
     private void drawPuzzle() {
@@ -189,13 +188,13 @@ public class GameScreen extends BaseScreen {
         float size = PuzzleElementInfo.PUZZLE_ELEMENT_1.getSize() / 1.5f;
         float x = Gdx.graphics.getWidth() - size * 1.5f;
         float y = size * 1.5f;
-        homeBtnSprite = KidPuzzleUtil.createSprite(BTN_HOME_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
+        homeBtnSprite = KidPuzzleGame.createSprite(BTN_HOME_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
         y = size * 3f;
-        soundBtnSprite = KidPuzzleUtil.createSprite(BTN_SOUND_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
+        soundBtnSprite = KidPuzzleGame.createSprite(BTN_SOUND_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
         y = size * 4.5f;
-        musicBtnSprite = KidPuzzleUtil.createSprite(BTN_MUSIC_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
+        musicBtnSprite = KidPuzzleGame.createSprite(BTN_MUSIC_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
         y = size * 6f;
-        payBtnSprite = KidPuzzleUtil.createSprite(BTN_PAY_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
+        payBtnSprite = KidPuzzleGame.createSprite(BTN_PAY_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
     }
 
     private void drawButtons() {
