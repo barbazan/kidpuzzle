@@ -44,17 +44,16 @@ public class GameScreen extends BaseScreen {
 
     private Puzzle puzzle;
     private PuzzleElement selectedPuzzleElement;
-    public boolean isWin = false;
+    private boolean isWin = false;
     private boolean winSoundPlay = false;
 
-    public GameScreen(KidPuzzleGame game) {
+    public GameScreen(KidPuzzleGame game, int puzzleNum) {
         super(game);
         this.game = game;
         initButtons();
         initSounds();
         initParticles();
-       	puzzle = Puzzle.PUZZLE_1; //todo
-		puzzle.initPuzzle(game);
+       	puzzle = Puzzle.values()[puzzleNum];
     }
 
     @Override
@@ -64,8 +63,16 @@ public class GameScreen extends BaseScreen {
 
 		game.batchBegin();
 		getBgSprite().draw(game.batch);
-        drawPuzzle();
-		drawButtons();
+        for(PuzzleElement puzzleElement : puzzle.puzzleElements) {
+            puzzleElement.spriteDisable.draw(game.batch);
+        }
+        for(PuzzleElement puzzleElement : puzzle.puzzleElements) {
+            puzzleElement.sprite.draw(game.batch);
+        }
+        drawButtons();
+        if(selectedPuzzleElement != null) {
+            selectedPuzzleElement.sprite.draw(game.batch);
+        }
 		if(isWin) {
             drawParticles();
 		}
@@ -161,15 +168,6 @@ public class GameScreen extends BaseScreen {
     @Override
     protected Sprite initBgSprite() {
         return KidPuzzleGame.createBgSprite(game.cam, GAME_BG_FILENAME);
-    }
-
-    private void drawPuzzle() {
-        for(PuzzleElement puzzleElement : puzzle.puzzleElements) {
-            puzzleElement.spriteDisable.draw(game.batch);
-        }
-        for(PuzzleElement puzzleElement : puzzle.puzzleElements) {
-            puzzleElement.sprite.draw(game.batch);
-        }
     }
 
     private void initSounds() {

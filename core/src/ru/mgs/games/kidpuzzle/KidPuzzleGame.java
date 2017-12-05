@@ -49,7 +49,7 @@ public class KidPuzzleGame extends Game {
 	public static boolean SOUND_ON = true;
 
 	public static AssetManager assetManager = new AssetManager();
-	public LoadingScreen loadingScreen;
+	private LoadingScreen loadingScreen;
 	public MenuScreen menuScreen;
 	public GameScreen gameScreen;
 	public OrthographicCamera cam;
@@ -92,16 +92,15 @@ public class KidPuzzleGame extends Game {
 	}
 
 	public void finishLoading() {
-		menuScreen = new MenuScreen(this);
-		gameScreen = new GameScreen(this);
-		bgSound = assetManager.get(SOUND_BG_FILENAME, Sound.class);
-		if(MUSIC_ON) {
-			bgSound.loop(DEFAULT_SOUND_VOLUME);
-		}
 		for(Puzzle puzzle : Puzzle.values()) {
 			puzzle.initPuzzle(this);
 			puzzles.add(puzzle);
 		}
+		bgSound = assetManager.get(SOUND_BG_FILENAME, Sound.class);
+		if(MUSIC_ON) {
+			bgSound.loop(DEFAULT_SOUND_VOLUME);
+		}
+		menuScreen = new MenuScreen(this);
 		Gdx.input.setInputProcessor(menuScreen.getInputProcessor());
 		setScreen(menuScreen);
 	}
@@ -142,8 +141,6 @@ public class KidPuzzleGame extends Game {
 	}
 
 	public static Sprite createSprite(String filename) {
-		System.out.println("filename = " + filename);
-//		Texture texture = new Texture(Gdx.files.internal(filename));
 		Texture texture = assetManager.get(filename, Texture.class);
 		texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
 		return new Sprite(texture);

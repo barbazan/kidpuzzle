@@ -80,11 +80,25 @@ public enum PuzzleElementInfo {
     }
 
     public Vector3 getPositionForMenu() {
-        int col = 1 + ordinal() / 4;
-        int row = 1 + ordinal() / 20;
-        float deltaX = Gdx.graphics.getWidth() / 20;
-        float deltaY = Gdx.graphics.getHeight() / 3;
-        return new Vector3(deltaX * col, deltaY * row, 0);
+        int row;
+        int col;
+        if(ordinal() < 20) {
+            row = 2;
+        } else {
+            row = 3;
+        }
+        if(row == 2) {
+            col = 1 + 2 * (ordinal() / 4);
+        } else {
+            col = 1 + 2 * (ordinal() - 20) / 4;
+        }
+        float padX = getSizeForMenu() / 2;
+        float deltaY = Gdx.graphics.getHeight() / 4;
+        return new Vector3(getSizeForMenu() * col - padX, deltaY * row, 0);
+    }
+
+    public float getSizeForMenu() {
+        return Gdx.graphics.getWidth() / 10;
     }
 
     private float getMultX() {
@@ -105,24 +119,6 @@ public enum PuzzleElementInfo {
             case 2: return 8;
             case 3:
             case 4: return 16;
-        }
-        return 0;
-    }
-
-    private float getMenuMultX() {
-        int num = 1 + ordinal() % 5;
-        switch (num) {
-            case 1:
-            case 2: return 1.5f;
-        }
-        return 0;
-    }
-
-    private float getMenuMultY() {
-        int num = 1 + ordinal() % 2;
-        switch (num) {
-            case 1: return 4;
-            case 2: return 8;
         }
         return 0;
     }

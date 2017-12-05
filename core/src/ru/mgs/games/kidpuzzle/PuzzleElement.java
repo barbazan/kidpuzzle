@@ -14,7 +14,7 @@ public class PuzzleElement {
     public Sprite sprite;
     public Sprite spriteDisable;
     public Sprite spriteMenu;
-    public boolean fixed;
+    private boolean fixed;
     private KidPuzzleGame game;
 
     public PuzzleElement(PuzzleElementInfo info, KidPuzzleGame game) {
@@ -23,6 +23,7 @@ public class PuzzleElement {
         sprite = createPuzzleSprite(game.cam.unproject(info.getStartPosition()));
         spriteDisable = createPuzzleSpriteDisable(game.cam.unproject(info.getPositionDisabled()));
         spriteMenu = createPuzzleSpriteMenu(game.cam.unproject(info.getPositionForMenu()));
+        spriteMenu.setSize(info.getSizeForMenu(), info.getSizeForMenu());
     }
 
     public Sprite createPuzzleSprite(Vector3 unprojectPosition) {
