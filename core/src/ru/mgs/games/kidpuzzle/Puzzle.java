@@ -34,7 +34,11 @@ import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_33;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_34;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_35;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_36;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_37;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_38;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_39;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_4;
+import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_40;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_5;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_6;
 import static ru.mgs.games.kidpuzzle.PuzzleElementInfo.PUZZLE_ELEMENT_7;
@@ -56,7 +60,8 @@ public enum Puzzle {
     PUZZLE_6(Arrays.asList(PUZZLE_ELEMENT_21, PUZZLE_ELEMENT_22, PUZZLE_ELEMENT_23, PUZZLE_ELEMENT_24)),
     PUZZLE_7(Arrays.asList(PUZZLE_ELEMENT_25, PUZZLE_ELEMENT_26, PUZZLE_ELEMENT_27, PUZZLE_ELEMENT_28)),
     PUZZLE_8(Arrays.asList(PUZZLE_ELEMENT_29, PUZZLE_ELEMENT_30, PUZZLE_ELEMENT_31, PUZZLE_ELEMENT_32)),
-    PUZZLE_9(Arrays.asList(PUZZLE_ELEMENT_33, PUZZLE_ELEMENT_34, PUZZLE_ELEMENT_35, PUZZLE_ELEMENT_36));
+    PUZZLE_9(Arrays.asList(PUZZLE_ELEMENT_33, PUZZLE_ELEMENT_34, PUZZLE_ELEMENT_35, PUZZLE_ELEMENT_36)),
+    PUZZLE_10(Arrays.asList(PUZZLE_ELEMENT_37, PUZZLE_ELEMENT_38, PUZZLE_ELEMENT_39, PUZZLE_ELEMENT_40));
 
     public List<PuzzleElementInfo> puzzleElementInfos;
     public List<PuzzleElement> puzzleElements;

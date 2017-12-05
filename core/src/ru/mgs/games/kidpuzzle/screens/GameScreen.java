@@ -14,9 +14,11 @@ import ru.mgs.games.kidpuzzle.PuzzleElement;
 import ru.mgs.games.kidpuzzle.PuzzleElementInfo;
 
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_HOME_FILENAME;
-import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_OFF_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_ON_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_PAY_FILENAME;
-import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_OFF_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_ON_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_SOUND_VOLUME;
 import static ru.mgs.games.kidpuzzle.GameConfig.GAME_BG_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.PARTICLE_WIN_FILENAME;
@@ -37,8 +39,10 @@ public class GameScreen extends BaseScreen {
     private Sound wrongSound;
     private Sound winSound;
     private Sprite homeBtnSprite;
-    private Sprite soundBtnSprite;
-    private Sprite musicBtnSprite;
+    private Sprite btnSoundOnSprite;
+    private Sprite btnSoundOffSprite;
+    private Sprite btnMusicOnSprite;
+    private Sprite btnMusicOffSprite;
     private Sprite payBtnSprite;
     private ParticleEffect particleEffect;
 
@@ -54,6 +58,7 @@ public class GameScreen extends BaseScreen {
         initSounds();
         initParticles();
        	puzzle = Puzzle.values()[puzzleNum];
+       	puzzle.initPuzzle(game);
     }
 
     @Override
@@ -97,11 +102,11 @@ public class GameScreen extends BaseScreen {
                     winSound.stop();
                     return true;
                 }
-                if(soundBtnSprite.getBoundingRectangle().contains(coords.x, coords.y)) {
+                if(btnSoundOnSprite.getBoundingRectangle().contains(coords.x, coords.y)) {
                     SOUND_ON = !SOUND_ON;
                     return true;
                 }
-                if(musicBtnSprite.getBoundingRectangle().contains(coords.x, coords.y)) {
+                if(btnMusicOnSprite.getBoundingRectangle().contains(coords.x, coords.y)) {
                     MUSIC_ON = !MUSIC_ON;
                     if(MUSIC_ON) {
                         game.bgSound.loop(DEFAULT_SOUND_VOLUME);
@@ -188,17 +193,27 @@ public class GameScreen extends BaseScreen {
         float y = size * 1.5f;
         homeBtnSprite = KidPuzzleGame.createSprite(BTN_HOME_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
         y = size * 3f;
-        soundBtnSprite = KidPuzzleGame.createSprite(BTN_SOUND_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
+        btnSoundOnSprite = KidPuzzleGame.createSprite(BTN_SOUND_ON_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
+        btnSoundOffSprite = KidPuzzleGame.createSprite(BTN_SOUND_OFF_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
         y = size * 4.5f;
-        musicBtnSprite = KidPuzzleGame.createSprite(BTN_MUSIC_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
+        btnMusicOnSprite = KidPuzzleGame.createSprite(BTN_MUSIC_ON_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
+        btnMusicOffSprite = KidPuzzleGame.createSprite(BTN_MUSIC_OFF_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
         y = size * 6f;
         payBtnSprite = KidPuzzleGame.createSprite(BTN_PAY_FILENAME, game.cam.unproject(new Vector3(x, y, 0)), size);
     }
 
     private void drawButtons() {
         homeBtnSprite.draw(game.batch);
-        soundBtnSprite.draw(game.batch);
-        musicBtnSprite.draw(game.batch);
+        if(MUSIC_ON) {
+            btnMusicOnSprite.draw(game.batch);
+        } else {
+            btnMusicOffSprite.draw(game.batch);
+        }
+        if(SOUND_ON) {
+            btnSoundOnSprite.draw(game.batch);
+        } else {
+            btnSoundOffSprite.draw(game.batch);
+        }
         payBtnSprite.draw(game.batch);
     }
 

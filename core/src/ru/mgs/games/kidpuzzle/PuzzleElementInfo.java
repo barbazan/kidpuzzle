@@ -45,7 +45,11 @@ public enum PuzzleElementInfo {
     PUZZLE_ELEMENT_33(),
     PUZZLE_ELEMENT_34(),
     PUZZLE_ELEMENT_35(),
-    PUZZLE_ELEMENT_36();
+    PUZZLE_ELEMENT_36(),
+    PUZZLE_ELEMENT_37(),
+    PUZZLE_ELEMENT_38(),
+    PUZZLE_ELEMENT_39(),
+    PUZZLE_ELEMENT_40();
 
     public String getFilename() {
         return "images/elem_" + (ordinal() + 1) + ".png";

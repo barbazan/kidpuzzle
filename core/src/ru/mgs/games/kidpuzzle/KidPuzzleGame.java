@@ -25,9 +25,11 @@ import ru.mgs.games.kidpuzzle.screens.LoadingScreen;
 import ru.mgs.games.kidpuzzle.screens.MenuScreen;
 
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_HOME_FILENAME;
-import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_OFF_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_MUSIC_ON_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_PAY_FILENAME;
-import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_OFF_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_ON_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_CAMERA_ZOOM;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_SOUND_VOLUME;
 import static ru.mgs.games.kidpuzzle.GameConfig.GAME_BG_FILENAME;
@@ -45,7 +47,7 @@ import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_WRONG_FILENAME;
 
 public class KidPuzzleGame extends Game {
 
-	public static boolean MUSIC_ON = false;
+	public static boolean MUSIC_ON = true;
 	public static boolean SOUND_ON = true;
 
 	public static AssetManager assetManager = new AssetManager();
@@ -80,8 +82,10 @@ public class KidPuzzleGame extends Game {
 		assetManager.load(MENU_BG_FILENAME, Texture.class);
 		assetManager.load(GAME_BG_FILENAME, Texture.class);
 		assetManager.load(BTN_HOME_FILENAME, Texture.class);
-		assetManager.load(BTN_SOUND_FILENAME, Texture.class);
-		assetManager.load(BTN_MUSIC_FILENAME, Texture.class);
+		assetManager.load(BTN_SOUND_ON_FILENAME, Texture.class);
+		assetManager.load(BTN_SOUND_OFF_FILENAME, Texture.class);
+		assetManager.load(BTN_MUSIC_ON_FILENAME, Texture.class);
+		assetManager.load(BTN_MUSIC_OFF_FILENAME, Texture.class);
 		assetManager.load(BTN_PAY_FILENAME, Texture.class);
 		for(Puzzle puzzle : Puzzle.values()) {
 			for(PuzzleElementInfo info : puzzle.puzzleElementInfos) {
