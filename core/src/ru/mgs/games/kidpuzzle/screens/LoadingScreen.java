@@ -3,11 +3,8 @@ package ru.mgs.games.kidpuzzle.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.ProgressBar;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import ru.mgs.games.kidpuzzle.KidPuzzleGame;
 
@@ -17,15 +14,11 @@ import ru.mgs.games.kidpuzzle.KidPuzzleGame;
  */
 public class LoadingScreen extends BaseScreen {
 
-    private Stage stage;
-    private Skin skin;
     private Label loading;
     private ProgressBar progressBar;
 
     public LoadingScreen(KidPuzzleGame game) {
         super(game);
-        stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
-        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
         loading = new Label("Загрузка...", skin);
         loading.setFontScale(2);
         loading.setPosition(Gdx.graphics.getWidth() / 2 - loading.getWidth() * loading.getFontScaleX() / 2, Gdx.graphics.getHeight() / 2 - loading.getHeight() / 2);
@@ -48,8 +41,7 @@ public class LoadingScreen extends BaseScreen {
             loading.setText("Загрузка... " + progress + "%");
             progressBar.setValue(progress);
         }
-        stage.act();
-        stage.draw();
+        super.render(Gdx.graphics.getDeltaTime());
     }
 
     @Override

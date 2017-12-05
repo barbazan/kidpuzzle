@@ -1,9 +1,12 @@
 package ru.mgs.games.kidpuzzle.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.input.GestureDetector;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.scenes.scene2d.ui.Label;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +31,11 @@ public class MenuScreen extends BaseScreen {
             Sprite spriteMenu = puzzle.puzzleElements.get(0).spriteMenu;
             btnSprites.add(spriteMenu);
         }
+        Label label = new Label("Пазлы для самых маленьких", skin);
+        label.setColor(Color.BLACK);
+        label.setFontScale(2);
+        label.setPosition(Gdx.graphics.getWidth() / 2 - label.getWidth() * label.getFontScaleX() / 2, Gdx.graphics.getHeight() - Gdx.graphics.getHeight() / 5);
+        stage.addActor(label);
     }
 
     @Override
@@ -40,6 +48,7 @@ public class MenuScreen extends BaseScreen {
             sprite.draw(game.batch);
         }
         game.batchEnd();
+        super.render(Gdx.graphics.getDeltaTime());
     }
 
     protected InputProcessor initInputProcessor() {

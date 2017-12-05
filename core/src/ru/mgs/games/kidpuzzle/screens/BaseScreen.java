@@ -1,8 +1,12 @@
 package ru.mgs.games.kidpuzzle.screens;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 
 import ru.mgs.games.kidpuzzle.KidPuzzleGame;
 
@@ -12,12 +16,16 @@ import ru.mgs.games.kidpuzzle.KidPuzzleGame;
  */
 public abstract class BaseScreen implements Screen {
 
-    protected KidPuzzleGame game;
-    protected InputProcessor inputProcessor;
-    protected Sprite bgSprite;
+    KidPuzzleGame game;
+    private InputProcessor inputProcessor;
+    private Sprite bgSprite;
+    Stage stage;
+    Skin skin;
 
-    public BaseScreen(KidPuzzleGame game) {
+    BaseScreen(KidPuzzleGame game) {
         this.game = game;
+        stage = new Stage(new StretchViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight()));
+        skin = new Skin(Gdx.files.internal("skins/uiskin.json"));
     }
 
     public InputProcessor getInputProcessor() {
@@ -45,7 +53,8 @@ public abstract class BaseScreen implements Screen {
 
     @Override
     public void render(float delta) {
-
+        stage.act();
+        stage.draw();
     }
 
     @Override
