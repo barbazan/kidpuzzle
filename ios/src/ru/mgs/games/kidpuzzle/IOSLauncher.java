@@ -17,7 +17,7 @@ public class IOSLauncher extends IOSApplication.Delegate {
             }
 
             @Override
-            public void removeAds() {
+            public void doPay() {
 
             }
 

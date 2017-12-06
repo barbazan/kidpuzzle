@@ -16,7 +16,7 @@ public class DesktopLauncher {
 			}
 
 			@Override
-			public void removeAds() {
+			public void doPay() {
 
 			}
 

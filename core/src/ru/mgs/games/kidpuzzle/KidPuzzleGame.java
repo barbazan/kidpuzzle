@@ -34,6 +34,7 @@ import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_CAMERA_ZOOM;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_SOUND_VOLUME;
 import static ru.mgs.games.kidpuzzle.GameConfig.GAME_BG_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.MENU_BG_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.PARTICLE_RIGHT_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.PARTICLE_WIN_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_BG_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_RIGHT_FILENAME;
@@ -79,6 +80,7 @@ public class KidPuzzleGame extends Game {
 		assetManager.load(SOUND_WRONG_FILENAME, Sound.class);
 		assetManager.load(SOUND_WIN_FILENAME, Sound.class);
 		assetManager.load(PARTICLE_WIN_FILENAME, ParticleEffect.class);
+		assetManager.load(PARTICLE_RIGHT_FILENAME, ParticleEffect.class);
 		assetManager.load(MENU_BG_FILENAME, Texture.class);
 		assetManager.load(GAME_BG_FILENAME, Texture.class);
 		assetManager.load(BTN_HOME_FILENAME, Texture.class);

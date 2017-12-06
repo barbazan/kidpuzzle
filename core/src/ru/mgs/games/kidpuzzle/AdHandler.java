@@ -6,6 +6,6 @@ package ru.mgs.games.kidpuzzle;
  */
 public interface AdHandler {
     void showAds(boolean show);
-    void removeAds();
+    void doPay();
     void processPurchases();
 }

@@ -27,6 +27,7 @@ public class GameConfig {
     public static final String SOUND_WRONG_FILENAME = "sound/wrong.mp3";
     public static final String SOUND_WIN_FILENAME = "sound/win.mp3";
 
-    public static final String PARTICLE_WIN_FILENAME = "particles/particle_1.pe";
+    public static final String PARTICLE_WIN_FILENAME = "particles/salut.p";
+    public static final String PARTICLE_RIGHT_FILENAME = "particles/star.p";
 
 }

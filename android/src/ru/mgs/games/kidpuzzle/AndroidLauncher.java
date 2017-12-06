@@ -167,7 +167,7 @@ public class AndroidLauncher extends AndroidApplication implements AdHandler {
 	}
 
 	@Override
-	public void removeAds() {
+	public void doPay() {
 		mHelper.launchPurchaseFlow(this, SKU_REMOVE_ADS, RC_REQUEST, mPurchaseFinishedListener, "HANDLE_PAYLOADS");
 	}
 

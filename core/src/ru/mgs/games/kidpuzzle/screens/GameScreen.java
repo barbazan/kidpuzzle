@@ -21,6 +21,7 @@ import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_OFF_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.BTN_SOUND_ON_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.DEFAULT_SOUND_VOLUME;
 import static ru.mgs.games.kidpuzzle.GameConfig.GAME_BG_FILENAME;
+import static ru.mgs.games.kidpuzzle.GameConfig.PARTICLE_RIGHT_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.PARTICLE_WIN_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_RIGHT_FILENAME;
 import static ru.mgs.games.kidpuzzle.GameConfig.SOUND_WIN_FILENAME;
@@ -44,11 +45,13 @@ public class GameScreen extends BaseScreen {
     private Sprite btnMusicOnSprite;
     private Sprite btnMusicOffSprite;
     private Sprite payBtnSprite;
-    private ParticleEffect particleEffect;
+    private ParticleEffect rightParticleEffect;
+    private ParticleEffect winParticleEffect;
 
     private Puzzle puzzle;
     private PuzzleElement selectedPuzzleElement;
     private boolean isWin = false;
+    private boolean isRight = false;
     private boolean winSoundPlay = false;
 
     public GameScreen(KidPuzzleGame game, int puzzleNum) {
@@ -78,9 +81,11 @@ public class GameScreen extends BaseScreen {
         if(selectedPuzzleElement != null) {
             selectedPuzzleElement.sprite.draw(game.batch);
         }
-		if(isWin) {
-            drawParticles();
-		}
+        if(isWin) {
+            winParticleEffect.draw(game.batch, Gdx.graphics.getDeltaTime());
+		} else if(isRight) {
+            rightParticleEffect.draw(game.batch, Gdx.graphics.getDeltaTime());
+        }
         game.batchEnd();
     }
 
@@ -116,7 +121,7 @@ public class GameScreen extends BaseScreen {
                     return true;
                 }
                 if(payBtnSprite.getBoundingRectangle().contains(coords.x, coords.y)) {
-                    game.adHandler.removeAds();
+                    game.adHandler.doPay();
                     return true;
                 }
 				for(PuzzleElement puzzleElement : puzzle.puzzleElements) {
@@ -142,10 +147,27 @@ public class GameScreen extends BaseScreen {
 				if(selectedPuzzleElement != null) {
 					if(selectedPuzzleElement.isInPlace()) {
 						selectedPuzzleElement.setFixed(true);
+						isRight = true;
+						rightParticleEffect.reset();
+						rightParticleEffect.start();
+						rightParticleEffect.setPosition(selectedPuzzleElement.sprite.getX() + selectedPuzzleElement.sprite.getWidth() / 2, selectedPuzzleElement.sprite.getY() + selectedPuzzleElement.sprite.getHeight() / 2);
                         if(SOUND_ON) {
                             rightSound.play(DEFAULT_SOUND_VOLUME);
                         }
-					} else {
+                        for(PuzzleElement puzzleElement : puzzle.puzzleElements) {
+                            if(!puzzleElement.isInPlace()) {
+                                isWin = false;
+                                return true;
+                            }
+                        }
+                        isWin = true;
+//                        winParticleEffect.reset();
+                        winParticleEffect.start();
+//                        System.out.println("winParticleEffect.start()");
+//                        Vector3 vector = game.cam.unproject(new Vector3(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight(), 0));
+//                        winParticleEffect.setPosition(vector.x, vector.y);
+//                        winParticleEffect.setPosition(0, 0);
+                    } else {
                         selectedPuzzleElement.setSize(selectedPuzzleElement.info.getSize());
 						selectedPuzzleElement.resetPosition();
                         if(SOUND_ON) {
@@ -153,18 +175,11 @@ public class GameScreen extends BaseScreen {
                         }
 					}
 					selectedPuzzleElement = null;
+                    if(isWin && SOUND_ON && !winSoundPlay) {
+                        winSoundPlay = true;
+                        winSound.play(DEFAULT_SOUND_VOLUME);
+                    }
 				}
-				isWin = true;
-				for(PuzzleElement puzzleElement : puzzle.puzzleElements) {
-					if(!puzzleElement.isInPlace()) {
-						isWin = false;
-						return true;
-					}
-				}
-				if(isWin && SOUND_ON && !winSoundPlay) {
-                    winSoundPlay = true;
-                    winSound.play(DEFAULT_SOUND_VOLUME);
-                }
 				return super.touchUp(x, y, pointer, button);
 			}
 		};
@@ -218,21 +233,15 @@ public class GameScreen extends BaseScreen {
     }
 
     private void initParticles() {
-        particleEffect = game.assetManager.get(PARTICLE_WIN_FILENAME, ParticleEffect.class);
-        particleEffect.getEmitters().first().setPosition(0, -Gdx.graphics.getHeight() / 2);
-        particleEffect.reset();
-    }
-
-    private void drawParticles() {
-        particleEffect.start();
-        particleEffect.update(Gdx.graphics.getDeltaTime());
-        particleEffect.draw(game.batch);
-//        if (particleEffect.isComplete()) {
-//            particleEffect.reset();
-//        }
+        rightParticleEffect = game.assetManager.get(PARTICLE_RIGHT_FILENAME, ParticleEffect.class);
+        winParticleEffect = game.assetManager.get(PARTICLE_WIN_FILENAME, ParticleEffect.class);
+//        Vector3 vector = game.cam.unproject(new Vector3(Gdx.graphics.getWidth() / 2, Gdx.graphics.getHeight() / 2, 0));
+//        winParticleEffect.getEmitters().first().setPosition(vector.x, vector.y);
+//        winParticleEffect.reset();
     }
 
     private void disposeParticles() {
-        particleEffect.dispose();
+        rightParticleEffect.dispose();
+        winParticleEffect.dispose();
     }
 }
